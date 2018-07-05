@@ -1,0 +1,43 @@
+.container{
+    margin-top: 20px;
+}
+.add-bot{
+    width: 300px;
+    height: 120px;
+    margin-right: 20px;
+}
+.fa{
+    cursor: pointer;
+}
+mat-card {
+    float: left;
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px;
+    height: 120px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.card-header{
+    display: grid;
+    grid-template-columns: 87% 13%;
+   
+    font-size: 18px;
+}
+.card-title{
+    margin-top : 15px;
+    margin-left: 15px;
+}
+.menu {
+    float: right;
+    margin-top :0px;
+}
+.bot-config{
+    margin-top: 10px;
+    float: right;
+} button {
+  border-radius: 5px;
+}
+.example-margin {
+    margin: 0 auto;  
+}

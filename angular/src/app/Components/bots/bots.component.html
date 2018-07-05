@@ -1,0 +1,156 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div *ngFor="let bot of bots">
+    <mat-card class="bot">
+      <div class="card-header">
+        <div class="card-title">
+          <h4>{{bot.name}}</h4>
+        </div>
+        <div class="menu">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <i class="fa fa-ellipsis-v" style="font-size:20px;" aria-hidden="true"></i>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item data-toggle="modal" data-target="#ebotModal" (click)="isEditing(bot._id,bot.name)">
+              <span>Rename</span>
+            </button>
+            <button mat-menu-item data-toggle="modal" data-target="#myModal" (click)="isDeleting(bot._id,bot.kbId)">
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <button mat-button color="primary" class="bot-config" [routerLink]="['/bots',bot._id]">Configure
+
+      </button>
+    </mat-card>
+  </div>
+  <button class="add-bot" mat-raised-button data-toggle="modal" data-target="#botModal">
+    <i style="font-size:20px" class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+
+  <!-- Add Form -->
+  <div class="modal addbot" id="botModal" role="dialog" data-dismiss="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Bot</h4>
+        </div>
+
+        <div class="modal-body">
+          <form [formGroup]="form">
+            <div class="form-group row">
+              <div *ngIf="progressBar">
+                <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+              </div>
+            </div>
+            <div *ngIf="isAdding==false">
+              <div class="form-group row">
+                <div>
+                  <div [ngClass]="messageClass">
+                    {{ message }}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10" [ngClass]="{'has-error': (form.controls.name.errors && form.controls.name.dirty), 
+                          'has-success': !form.controls.name.errors}">
+                    <input type="text" class="form-control" name="name" formControlName="name">
+                    <ul class="help-block">
+                      <li *ngIf="form.controls.name.errors?.required && form.controls.name.dirty">This field is required</li>
+                    </ul>
+                  </div>
+                </div>
+                <button type="submit" [disabled]="!form.valid" class="btn btn-success" (click)="addBot()">Create</button>
+
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Add Form -->
+
+  <!-- Edit Form -->
+  <div class="modal editbot" id="ebotModal" role="dialog" data-dismiss="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Rename</h4>
+        </div>
+
+        <div class="modal-body">
+          <form [formGroup]="formEdit">
+            <div class="form-group row">
+              <div *ngIf="_progressBar">
+                <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+              </div>
+            </div>
+            <div *ngIf="isEdit == false">
+              <div class="form-group row">
+                <div>
+                  <div [ngClass]="messageEditClass">
+                    {{ messageEdit }}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="name">
+                  <ul class="help-block">
+                    <li *ngIf="formEdit.controls.name.errors?.required && formEdit.controls.name.dirty">This field is required</li>
+                  </ul>
+                </div>
+              </div>
+              <button type="submit" [disabled]="!formEdit.valid" class="btn btn-success" (click)="editBot()">Save</button>
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Edit -->
+  <!-- Delete Form -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirm</h4>
+        </div>
+        <div class="modal-body">
+          <p *ngIf="_processing">Are you sure you would like to delete this bot?</p>
+          <div *ngIf="progressBarDel">
+            <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+          </div>
+        </div>
+        <div class="modal-footer" *ngIf="isDelete==false">
+          <button type="button" class="btn btn-success" name="button" (click)="deleteBot()">Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--///////////////////// End Delete Form //////////////////-->
+</div>

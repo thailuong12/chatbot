@@ -1,0 +1,369 @@
+<div class="broadcast-content">
+  <div class="broadcast-type">
+    <div class="now">
+      <div class="send-now-title">
+        <h5>DELIVER YOUR SURVEY NOW</h5>
+      </div>
+      <button mat-raised-button class="send-now-survey" *ngFor="let broadcast of allBroadCast" (click)="setBroadCastType(broadcast._id)">
+        {{broadcast.name.substring(0,20)}} <span>...</span>
+      </button>
+      <button mat-raised-button class="add-new-survey" data-toggle="modal" data-target="#surveyModal">
+        Add New Survey
+      </button>
+    </div>
+
+
+  </div>
+  <div class="broadcast-config" *ngIf="broadCastType=='on'">
+      <div >
+        <div class="config-now">
+          <div class="now-content">
+            <div class="btn-block">
+              <div>
+                <button mat-raised-button color="warn" class="send" (click)="sendSurvey()">
+                  <i class="fa fa-share" aria-hidden="true" ></i>
+                  SEND
+                </button>
+              </div>
+              <div class="text">
+                <h3>Broadcast Your Survey Now</h3>
+
+              </div>
+              <div class="deleteSurvey">
+                <i class="material-icons deleteQuickBtn"  style="font-size:30px;" (click)="deleteSurvey()">delete_sweep</i>
+              </div>
+
+            </div>
+            <hr>
+            <div class="now-survey-content">
+              <div>
+                <form>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <div>
+                      <input type="text" class="BroadCastName form-control" value="{{broadCast[0].name}}" (change)="editBlockName($event)">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Content</label>
+                    <div>
+                      <textarea (change)="editContentText($event)">{{broadCast[0].flow[0].text}}</textarea>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <mat-card class="quickreplies" *ngFor="let quickreply of broadCast[0].flow[0].quickreplies">
+                <div class="content">
+                  <div class="header">
+                    <mat-card-title>{{quickreply.title}}</mat-card-title>
+                  </div>
+                  <div class="menu">
+                    <i class="material-icons deleteQuickBtn" (click)="deleteQuickReply(quickreply._id)">delete_sweep</i>
+                  </div>
+                </div>
+              </mat-card>
+
+              <mat-card class="add-quickreplies" (click)="changeAddQuickStatus()" *ngIf="addQuickStatus==false">
+                <div class="test">
+                  <span class="glyphicon glyphicon-plus"></span>
+                  Add Quick Reply
+                </div>
+
+              </mat-card>
+
+              <mat-card class="form-add-quickreplies" *ngIf="addQuickStatus==true">
+                <form [formGroup]="quickReplyForm" class="addQuickForm">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="name">
+                    </div>
+                  </div>
+                </form>
+                <div class="twobtnAddQuick">
+                  <button class="btn btn-primary addQuickCancel" (click)="changeAddQuickStatus()">Cancel</button>
+                  <button class="btn btn-primary addQuickOk"  [disabled]="!quickReplyForm.valid"(click)="addQuickReply()">Ok</button>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<ng-template #schedule class="config-schedule">
+  <div class="schedule-content">
+    <div class="status-block">
+      <div class="schedule-title">
+        <h4>Schedule For Later</h4>
+      </div>
+      <div class="radio-btn">
+        <mat-radio-group>
+          <mat-radio-button value="1">On</mat-radio-button>
+          <mat-radio-button value="2">Off</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="schedule-attribute-block">
+      <h4>User Attribute</h4>
+      <div>
+        <form>
+          <mat-form-field>
+            <mat-select placeholder="Attribute" [(ngModel)]="userAtt" name="attribute">
+              <mat-option *ngFor="let att of attribute" [value]="att.name">
+                {{att.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <form>
+          <mat-form-field>
+            <mat-select placeholder="Condition" [(ngModel)]="cond" name="condition">
+              <mat-option *ngFor="let cond of condition" [value]="cond.name">
+                {{cond.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <mat-form-field>
+          <input matInput placeholder="Value" [(ngModel)]="value">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="datetime-block">
+      <div class="datepicker-title">
+        <h4>Date Time</h4>
+      </div>
+      <div class="date-picker">
+        <div class="">
+          <mat-form-field>
+            <input matInput [matDatepicker]="dp3" placeholder="Date" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="">
+          <input class="form-control time" type="time" placeholder="Time">
+        </div>
+        <div class="repeat">
+          <mat-form-field>
+            <mat-select placeholder="Repeat" [(ngModel)]="repeatType">
+              <mat-option *ngFor="let rep of repeat" [value]="rep.name">
+                {{ rep.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="custom-days" *ngIf="repeatType=='Custom'">
+        <mat-checkbox color="primary">Sun</mat-checkbox>
+        <mat-checkbox color="primary">Mon</mat-checkbox>
+        <mat-checkbox color="primary">Tue</mat-checkbox>
+        <mat-checkbox color="primary">Wed</mat-checkbox>
+        <mat-checkbox color="primary">Thu</mat-checkbox>
+        <mat-checkbox color="primary">Fri</mat-checkbox>
+        <mat-checkbox color="primary">Sat</mat-checkbox>
+      </div>
+    </div>
+    <div class="content-block">
+      <div class="add-btn-title">
+        ADD A CARD
+      </div>
+      <!-- danh sách các nút thêm thẻ -->
+      <div class='card-item'>
+        <ul>
+          <li (click)="getCard('addText')">
+            <mat-card class="add-text-card">
+              <div class="add-text-icon">
+                <i class="fa fa-align-left" aria-hidden="true"></i>
+              </div>
+              <div class="add-text-text">
+                Text
+              </div>
+            </mat-card>
+          </li>
+          <li (click)="getCard('addTemplate')">
+            <mat-card class="add-text-card">
+              <div class="add-text-icon">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+              </div>
+              <div class="add-text-text">
+                Template
+              </div>
+            </mat-card>
+          </li>
+          <li>
+            <mat-card class="add-text-card">
+              <div class="add-text-icon">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>
+              </div>
+              <div class="add-text-text">
+                Image
+              </div>
+            </mat-card>
+          </li>
+          <li>
+            <mat-card class="add-text-card">
+              <div class="add-text-icon">
+                <i class="fa fa-columns" aria-hidden="true"></i>
+              </div>
+              <div class="add-text-text">
+                Gallery
+              </div>
+            </mat-card>
+          </li>
+          <li>
+            <mat-card class="add-text-card">
+              <div class="add-text-icon">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </div>
+              <div class="add-text-text">
+                Quick Reply
+              </div>
+            </mat-card>
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+
+</ng-template>
+
+<div class="modal addSurvey" id="sendSuccessModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+
+      <div class="modal-body">
+       
+       <h3>Send Successfully</h3>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="surveyModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add A Survey</h4>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="addSurveyForm">
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="title" formControlName="name">
+            </div>
+          </div>
+        </form>
+        <button type="submit" class="btn btn-success"  [disabled]="!addSurveyForm.valid" (click)="addSurvey()">Create</button>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+  
+
+              <div class="now-attribute-block">
+                <h4>User Attribute</h4>
+                <div>
+                  <form>
+                    <mat-form-field>
+                      <mat-select placeholder="Attribute" [(ngModel)]="userAtt" name="attribute">
+                        <mat-option *ngFor="let att of attribute" [value]="att.name">
+                          {{att.name}}
+                        </mat-option>
+                      </mat-select>
+          
+                    </mat-form-field>
+                  </form>
+                  <form>
+                    <mat-form-field>
+                      <mat-select placeholder="Condition" [(ngModel)]="cond" name="condition">
+                        <mat-option *ngFor="let cond of condition" [value]="cond.name">
+                          {{cond.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </form>
+                  <mat-form-field>
+                    <input matInput placeholder="Value" [(ngModel)]="value">
+                  </mat-form-field>
+                </div>
+              </div>
+          
+              <div class="content-block">
+                <div class="add-btn-title">
+                  ADD A CARD
+                </div>
+            
+                <div class='card-item'>
+                  <ul>
+                    <li (click)="getCard('addText')">
+                      <mat-card class="add-text-card">
+                        <div class="add-text-icon">
+                          <i class="fa fa-align-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="add-text-text">
+                          Text
+                        </div>
+                      </mat-card>
+                    </li>
+                    <li (click)="getCard('addTemplate')">
+                      <mat-card class="add-text-card">
+                        <div class="add-text-icon">
+                          <i class="fa fa-credit-card" aria-hidden="true"></i>
+                        </div>
+                        <div class="add-text-text">
+                          Template
+                        </div>
+                      </mat-card>
+                    </li>
+                    <li>
+                      <mat-card class="add-text-card">
+                        <div class="add-text-icon">
+                          <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="add-text-text">
+                          Image
+                        </div>
+                      </mat-card>
+                    </li>
+                    <li>
+                      <mat-card class="add-text-card">
+                        <div class="add-text-icon">
+                          <i class="fa fa-columns" aria-hidden="true"></i>
+                        </div>
+                        <div class="add-text-text">
+                          Gallery
+                        </div>
+                      </mat-card>
+                    </li>
+                    <li>
+                      <mat-card class="add-text-card">
+                        <div class="add-text-icon">
+                          <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </div>
+                        <div class="add-text-text">
+                          Quick Reply
+                        </div>
+                      </mat-card>
+                    </li>
+                  </ul>
+                </div>
+                <hr>
+              </div>
+            -->

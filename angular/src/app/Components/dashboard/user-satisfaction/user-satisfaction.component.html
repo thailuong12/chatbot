@@ -1,0 +1,9 @@
+<div class="boudaries">
+  <div class="header">
+    <h4 class="title text-muted">Answer Analytic (%)</h4>
+  </div>
+  <div class="pieChart" style="display: block">
+    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"></canvas>
+  </div>
+</div>

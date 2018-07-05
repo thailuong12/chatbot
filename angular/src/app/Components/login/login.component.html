@@ -1,0 +1,95 @@
+<img id="backgroundimage"  src="assets/img/backg.jpg">
+
+    <div *ngIf="loginService.loggedIn(); then loggedIn else notLogin" class="main">
+      </div>
+      
+      <ng-template #notLogin>
+        <div class="container">
+          <div class="header">
+           <img src="assets/img/logo.png" alt="">
+          </div>
+          <!-- <form id="login" (submit)="onSubmitLogin()">
+            <div>
+      
+              <input class="form-control" type="text" placeholder="Username" required ngModel id="username" name="Username" [(ngModel)]="Username">
+      
+            </div>
+            <div>
+      
+              <input class="form-control" type="password" placeholder="Password" required ngModel id="password" name="Password" [(ngModel)]="Password">
+      
+            </div>
+            <br>
+            <div class="form">
+      
+              <a id="forget-password" style="float: right;" data-toggle="modal" data-target="#fp">Forgot Password?</a>
+            </div>
+            <br>
+            <br>
+            <div class="form">
+              <button mat-raised-button color="primary" id="login-button" type="submit">LOGIN</button>
+            </div>
+          </form> -->
+          <form (submit)="onSubmitLogin()"  [formGroup]="loginform">
+              <div class="form-group" [ngClass]="{'has-error': LoginSuccess == false, 
+              'has-success': LoginSuccess==true}">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="email" class="form-control" required ngModel id="username" name="Username" formControlName="username" [(ngModel)]="Username"  aria-describedby="emailHelp" placeholder="Enter Username">
+               
+              </div>
+              <div class="form-group" [ngClass]="{'has-error': LoginSuccess == false, 
+              'has-success': LoginSuccess==true}">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" required ngModel required ngModel id="password" formControlName="password" name="Password" [(ngModel)]="Password" placeholder="Enter Password">
+              </div>
+             
+              <button type="submit"  class="btn btn-primary" [disabled]="!loginform.valid || progressing">Login</button>
+              <a id="forget-password" style="float: right;" data-toggle="modal" data-target="#fp">Forgot Password?</a>
+            </form>
+        </div>
+      </ng-template>
+      
+      <div class="modal fp" id="fp" role="dialog" data-dismiss="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Forgot Password</h4>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="form">
+                <div class="form-group row">
+                  <div *ngIf="progressBar">
+                    <mat-progress-spinner class="example-margin" color="primary" mode="indeterminate">
+                    </mat-progress-spinner>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div>
+                    <div [ngClass]="messageClass">
+                      {{ message }}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                  <div class="cols-sm-10">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                      </span>
+                      <input type="text" class="form-control" name="email" id="email" formControlName="email" placeholder="Enter your Email" />
+                    </div>
+                    <label for="confirm">Please Enter : CONFIRM</label>
+                    <input type="text" class="form-control" name="confirm" id="confirm" formControlName="confirm" />
+                  </div>
+                </div>
+              </form>
+              <button type="submit" class="btn btn-success" [disabled]="!form.valid" (click)="forgotPassword()">Reset Password</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+

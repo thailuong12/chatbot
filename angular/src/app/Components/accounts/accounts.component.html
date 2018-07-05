@@ -1,0 +1,290 @@
+<app-navbar></app-navbar>
+<div class="manageAccount">
+    <div *ngIf="showButtonAdd">
+        <div class="addButton">
+            <button mat-raised-button color="warn" (click)="AddNewAccountForm()" type="button" name="button" class="btn-md pull-right">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add new account
+            </button>
+        </div>
+    </div>
+
+    <!-- Add Form -->
+    <div *ngIf="showAddForm">
+        <div class="main-login main-center">
+            <form class="form-horizontal" [formGroup]="form">
+                <div class="form-group">
+                    <div class="row show-hide-message">
+                        <div [ngClass]="messageClass">
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10" [ngClass]="{'has-error': (form.controls.name.errors && form.controls.name.dirty), 
+                    'has-success': !form.controls.name.errors}">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="name" id="name" formControlName="name" placeholder="Enter your Name" />
+                        </div>
+                        <ul class="help-block">
+                            <li *ngIf="form.controls.name.errors?.required && form.controls.name.dirty">This field is required</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10" [ngClass]="{'has-error': (form.controls.email.errors && form.controls.email.dirty), 
+                    'has-success': !form.controls.email.errors}">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="email" id="email" formControlName="email" placeholder="Enter your Email" 
+                            />
+                        </div>
+                        <ul class="help-block">
+                            <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">This field is required</li>
+                            <li *ngIf="(form.controls.email.errors?.minlength || form.controls.email.errors?.maxlength) && form.controls.email.dirty ">Minimun characters: 5, Maximun characters: 30</li>
+                            <li *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty ">This must be a valid e-mail</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Username</label>
+                    <div class="cols-sm-10" [ngClass]="{'has-error': (form.controls.username.errors && form.controls.username.dirty), 
+                    'has-success': !form.controls.username.errors}">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-users fa" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="username" id="username" formControlName="username" placeholder="Enter your Username"
+                               />
+                        </div>
+                        <ul class="help-block">
+                            <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">This field is required</li>
+                            <li *ngIf="(form.controls.username.errors?.minlength || form.controls.username.errors?.maxlength) && form.controls.username.dirty">Minimun characters: 3, Maximun characters: 15</li>
+                            <li *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty ">Username must not have any special characters</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10" [ngClass]="{'has-error': (form.controls.password.errors && form.controls.password.dirty), 
+                    'has-success': !form.controls.password.errors}">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <input type="password" class="form-control" name="password" id="password" formControlName="password" placeholder="Enter your Password"
+                            />
+                        </div>
+                        <ul class="help-block">
+                            <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">This field is required</li>
+                            <li *ngIf="(form.controls.password.errors?.minlength || form.controls.password.errors?.maxlength) && form.controls.password.dirty">Minimun characters: 8, Maximun characters: 35</li>
+                            <li *ngIf="form.controls.password.errors?.validatePassword  && form.controls.password.dirty">Password must have at least one uppercase, lowercase, and number</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                    <div class="cols-sm-10" [ngClass]="{'has-error': (form.controls.confirm.errors && form.controls.confirm.dirty) ||  (form.errors?.mathchingPasswords && form.controls.confirm.dirty),
+                    'has-success': !form.controls.confirm.errors && !form.errors?.mathchingPasswords}">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <input type="password" class="form-control" name="confirm" id="confirm" formControlName="confirm" placeholder="Confirm your Password"
+                            />
+                        </div>
+                        <ul class="help-block">
+                            <li *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">This field is required</li>
+                            <li *ngIf="form.errors?.mathchingPasswords && form.controls.confirm.dirty">Password do not match</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button [disabled]="!form.valid || processing" (click)="onRegisterSubmit()" mat-raised-button
+                        color="primary" type="button" class="btn-lg btn-block register-button">
+                        Submit</button>
+                </div>
+                <div class="register-cancel">
+                    <button mat-button color="primary" (click)="resetForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /////////////// End Add Form //////////////////////////////-->
+
+
+    <!-- Edit Form -->
+        <div *ngIf="showEditForm">
+            <div class="main-login main-center">
+                <form class="form-horizontal" [formGroup]="formEdit">
+                    <div class="form-group">
+                        <div class="row show-hide-message">
+                            <div [ngClass]="messageEditClass">
+                                {{ messageEdit }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Your New Name</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" name="name" id="name" formControlName="name" [(ngModel)]="account.name"/>
+                            </div>
+                            <ul class="help-block">
+                                <li *ngIf="formEdit.controls.name.errors?.required && formEdit.controls.name.dirty">This field is required</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Your Username</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" name="username" id="username"  formControlName="username" [(ngModel)] ="account.username"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Your New Email</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" class="form-control" name="email" id="email" formControlName="email" [(ngModel)] ="account.email"
+                                />
+                            </div>
+                            <ul class="help-block">
+                                <li *ngIf="formEdit.controls.email.errors?.required && formEdit.controls.email.dirty">This field is required</li>
+                                <li *ngIf="(formEdit.controls.email.errors?.minlength || formEdit.controls.email.errors?.maxlength) && formEdit.controls.email.dirty ">Minimun characters: 5, Maximun characters: 30</li>
+                                <li *ngIf="formEdit.controls.email.errors?.validateEmail && formEdit.controls.email.dirty ">This must be a valid e-mail</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">New Password</label>
+                        <div class="cols-sm-10" >
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="password" class="form-control" name="password" id="password" formControlName="password" placeholder="Enter your Password"
+                                />
+                            </div>
+                            <ul class="help-block">
+                                <li *ngIf="formEdit.controls.password.errors?.required && formEdit.controls.password.dirty">This field is required</li>
+                                <li *ngIf="(formEdit.controls.password.errors?.minlength || formEdit.controls.password.errors?.maxlength) && form.controls.password.dirty">Minimun characters: 8, Maximun characters: 35</li>
+                                <li *ngIf="formEdit.controls.password.errors?.validatePassword  && formEdit.controls.password.dirty">Password must have at least one uppercase, lowercase, and number</li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="password" class="form-control" name="confirm" id="confirm" formControlName="confirm" placeholder="Confirm your Password"
+                                />
+                            </div>
+                            <ul class="help-block">
+                                <li *ngIf="formEdit.controls.confirm.errors?.required && formEdit.controls.confirm.dirty">This field is required</li>
+                                <li *ngIf="formEdit.errors?.mathchingPasswords && formEdit.controls.confirm.dirty">Password do not match</li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                    <div class="form-group ">
+                        <button mat-raised-button color="primary" [disabled]="!formEdit.valid" type="button" class="btn-lg btn-block register-button"
+                            (click)="updateAccountSubmit()">
+                            Save</button>
+                    </div>
+                    <div class="register-cancel">
+                        <button mat-button color="primary" (click)="resetForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <!-- /////////////// End Edit Form //////////////////////////// -->
+
+    <!-- Delete Form -->
+     <!-- Modal -->
+     <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+              <p *ngIf="_processing">Are you sure you would like to delete this account?</p>
+              <div class="row show-hide-message">
+                <div [ngClass]="messageClassDelete">
+                  {{ messageDelete }}
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" name="button" (click)="deleteAccount()">Yes</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <!-- ////////////// End Delete Form /////////////////////////// -->
+
+    <!-- List Account -->
+    <div *ngIf="showListForm">
+        <div class="listAccount">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tr *ngFor="let account of accountPosts; let i = index">
+                    <td>{{ i }}</td>
+                    <td>{{account.name}}</td>
+                    <td>{{account.username}}</td>
+                    <td>{{account.email}}</td>
+                    <td class="text-center">
+                        <!-- <a class='btn btn-info btn-sm' [routerLink]="['/edit-account/',account._id]">
+                            <span class="glyphicon glyphicon-edit"></span> Edit</a> -->
+                        <a class='btn btn-info btn-sm' (click)="editAccountForm(account._id)">
+                            <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModal" (click)="deleteAccountForm(account._id)">
+                            <span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- ///////////// End List Account /////////////////////////// -->
+</div>

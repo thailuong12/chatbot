@@ -1,0 +1,353 @@
+<div class="plugins-content">
+  <h2 class="page-header" id="header">INTEGRATE INTO FACEBOOK</h2>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>1. Create a Facebook page</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="">
+        <img matInput src="assets/img/1.png">
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>2. Create a Facebook app</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field class="body">
+        <input matInput placeholder="">
+        <ul>
+          <li>Access to the following link:
+            <strong>https://developers.facebook.com/</strong>
+          </li>
+          <br>
+          <li> Click on
+            <strong>My Apps</strong> button to navigate to Facebook App Manager </li>
+        </ul>
+        <img matInput src="assets/img/3.png">
+        <ul>
+          <li> Choose
+            <strong>a New App </strong>
+          </li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/4.png">
+        <ul>
+          <br>
+          <li> Choose a
+            <strong>Display Name </strong> for the application then click
+            <strong>Create App ID</strong>
+          </li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/5.png">
+        <ul>
+          <br>
+          <li>Facebook will redirect you to the following page:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/6.png">
+        <ul>
+          <br>
+          <li>Select
+            <strong>Messenger</strong> module</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/7.png">
+        <ul>
+          <br>
+          <li>Click
+            <strong>Set Up</strong> button</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/8.png">
+        <ul>
+          <br>
+          <li>You will be redirected to Messenger Platform setting of your app</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/9.png">
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>3. Get App Secret Token and Page Access Token</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field class="body">
+        <input matInput placeholder="">
+        <ul>
+          <li>We need to obtain two tokens from Facebook app</li>
+          <br>
+          <li>First one is App Secret Token:</li>
+          <br>
+          <li>Click on
+            <strong>Dashboard</strong> tab on Navigation Bar</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/10.png">
+        <ul>
+          <br>
+          <li>In Dashboard page, scroll to Dashboard section where you can view the name of the app, API Version, App ID and
+            App Secret with hidden characters</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/11.png">
+        <ul>
+          <br>
+          <li>Click show button to view the
+            <strong>App Secret,</strong> you may have to input the Facebook password of your currently account.</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/12.png">
+        <ul>
+          <br>
+          <li>Get the App Secret string and save it somewhere.</li>
+          <br>
+          <li>We got the first token. Next is Page Access Token:</li>
+          <br>
+          <li>Go back to Messenger Platform settings page:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/13.png">
+        <ul>
+          <br>
+          <li>Scroll down to Token Generation section.</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/14.png">
+        <ul>
+          <br>
+          <li>Select a Page you owned from the drop down list:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/15.png">
+        <ul>
+          <br>
+          <li>After a page is selected, Page Access Token will be generated in the text field on the right:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/16.png">
+        <ul>
+          <br>
+          <li>Facebook will ask you for granting the permissions to the app:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/17.png">
+        <br>
+        <img matInput src="assets/img/18.png">
+        <ul>
+          <br>
+          <li>After permissions granted, you can get the Page Access Token:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/19.png">
+        <ul>
+          <br>
+          <li>Now, back to Laura App and copy two tokens into the fields on Laura App - Integration with Facebook page:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/20.png">
+        <ul>
+          <br>
+          <li>
+            Then click
+            <strong>Save.</strong> Laura will generate the two materials for the next steps:
+            <strong>Webhook (Or Callback) URL</strong> and
+            <strong>Verify Token</strong>
+          </li>
+        </ul>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>4. Setup Webhook URL and Verify Token</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field class="body">
+        <input matInput placeholder="">
+        <ul>
+          <li>As the previous step, we can obtain the Webhook URL and Verify Token after clicked Save button with valid Tokens</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/21.png">
+        <ul>
+          <br>
+          <li>Go back to Messenger Platform settings page, scroll down to Webhooks section, click on
+            <strong>Setup Webhooks</strong> button</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/22.png">
+        <ul>
+          <br>
+          <li>Select at least the following checkboxes:
+            <strong> messages, messaging_postbacks , messaging_optins, message_deliveries </strong>
+          </li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/23.png">
+        <ul>
+          <br>
+          <li>Copy the Webhook URL and Verify Token then paste to the following fields:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/24.png">
+        <ul>
+          <br>
+          <li>Then click
+            <strong>Verify and Save</strong> button:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/25.jpg">
+        <ul>
+          <br>
+          <li>After the verification, select a Page to subscribe the webhook:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/26.png">
+        <ul>
+          <br>
+          <li>Then click
+            <strong> Subscribe </strong> and the setup is completed!</li>
+        </ul>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>5. Setup your Facebook page and chat with your bot</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field class="body">
+        <input matInput placeholder="">
+        <ul>
+          <li>You can go back to your Facebook page, setup the main button on the right:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/27.png">
+        <ul>
+          <br>
+          <li>The default option is set as Donate, choose Other Options</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/28.png">
+        <ul>
+          <br>
+          <li>Select Use our Messenger Bot from the list of options for set up the button, a few options to display such as:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/29.png">
+        <br>
+        <img matInput src="assets/img/30.png">
+        <ul>
+          <br>
+          <li>Select one and Save Changes</li>
+          <br>
+          <li>You can test the button by clicking on it:</li>
+        </ul>
+        <br>
+        <img matInput src="assets/img/31.png">
+        <ul>
+          <br>
+          <li>
+            Click
+            <strong>Test Button</strong> and start chat with your bot!
+          </li>
+        </ul>
+
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="toggleBot">
+    <h3>Bot Configuration
+    </h3>
+    <hr>
+    <p>CONNECT TO FACEBOOK</p>
+    <form class="example-form" [formGroup]="formFBS">
+      <div class="form-group">
+        <div>
+          <div [ngClass]="messageFBSClass">
+            {{ messageFBS }}
+          </div>
+        </div>
+      </div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Facebook Token" formControlName="fbToken" [(ngModel)]="fbsEdit.fbToken">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="App Secret" formControlName="appSecret" [(ngModel)]="fbsEdit.appSecret">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="btn-md pull-right" [disabled]="!formFBS.valid" (click)="updateFBS()">
+        Save
+      </button>
+    </form>
+    <hr>
+    <p>GMAIL ACCOUNT</p>
+    <form class="example-form" [formGroup]="formGmail">
+      <div class="form-group">
+        <div>
+          <div [ngClass]="messageGmailClass">
+            {{ messageGmail }}
+          </div>
+        </div>
+      </div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Gmail Address" formControlName="email" [(ngModel)]="email">
+      </mat-form-field>
+
+      <mat-form-field class="showpassword">
+        <input matInput [type]="showpassword" placeholder="Password" formControlName="password" [(ngModel)]="password">
+      </mat-form-field>
+      <i class="material-icons" (click)="showpass()">remove_red_eye</i>
+      <button mat-raised-button color="primary" class="btn-md pull-right" [disabled]="!formGmail.valid" (click)="updateGmail()">
+        Save
+      </button>
+    </form>
+    <!-- <hr>
+    <p>QNA API VERSION</p>
+    <form class="example-form" [formGroup]="formQNA">
+      <div class="form-group">
+        <div>
+          <div [ngClass]="messageQNAClass">
+            {{ messageQNA }}
+          </div>
+        </div>
+      </div>
+      <mat-form-field class="qnaVersion">
+        <input matInput placeholder="Version" formControlName="version" [(ngModel)]="version">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="btn-md pull-right qnaBnt" [disabled]="!formQNA.valid" (click)="updateQNA()">
+        Save
+      </button>
+    </form> -->
+    <hr>
+    <div class="form-group row">
+      <label class="col-sm-1 col-form-label">Webhook</label>
+      <div class="col-sm-11">
+        <input type="text" class="form-control" value='{{webHookGen}}' readonly="readonly">
+      </div>
+    </div>
+    <hr>
+    <button mat-raised-button color="warn" class="btn-md pull-left" *ngIf="disable" (click)="deleteMenu()">
+      DISABLE HOME
+    </button>
+    <button mat-raised-button color="primary" class="btn-md pull-left" *ngIf="enable" (click)="setMenu()">
+      ENABLE HOME
+    </button>
+  </div>
+
+</div>

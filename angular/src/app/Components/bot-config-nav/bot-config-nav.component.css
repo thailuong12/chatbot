@@ -1,0 +1,122 @@
+/* .side-navbar{
+    background-color: #F3F2F2;
+}
+a{
+    text-decoration: none;
+}
+ul {
+    text-align: center;
+}
+li  {
+    height: 70px;
+    border-radius: 5px;
+    background-color: white;
+    margin-top: 28px;
+    padding: 20px;
+}
+ul a {
+    padding-top: 20px;
+    margin-top: 15px;
+}
+.icon i{
+    margin: auto;
+    margin-top: 8px;
+}
+.text {
+  color: black;
+  
+}
+.item {
+    margin:auto;
+}
+
+.add-form{
+    cursor: pointer;
+    height: 70px;
+    padding: 0px;
+    margin-bottom: 15px;
+} */
+
+
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
+
+
+
+.nav {
+  list-style: none;
+  padding-top: 150px;
+  background: #6e6b6b;
+  display: inline-block;
+  height: 100vh;
+  position: absolute;
+}
+.nav li {
+  cursor: pointer;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: -1px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 18px;
+  font-family: "Roboto Slab", serif;
+  color: #ffffff;
+}
+.nav li div,
+.nav li i {
+  position: absolute;
+  text-align: center;
+  animation-duration: 0.34s;
+}
+.nav li div {
+  margin-left: 60px;
+  text-align: center;
+  width: 160px;
+}
+hr {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
+.nav li i {
+  line-height: 60px;
+  width: 60px;
+  z-index: 9;
+  background: #6b6e6c;
+
+  
+}
+.nav li div {
+  display: none;
+  z-index: 1;
+  background: #6e6b6b;
+}
+
+.nav li:hover > div {
+   
+  display: inline-block;
+}
+.nav li:hover i {
+  background: #6e6b6b;
+}
+
+.hero {
+  height: 50vh;
+  text-align: center;
+  padding-top: 22%;
+  font-family: "Roboto Slab", serif;
+  font-size: 28px;
+}
+.credits {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+.credits a {
+  margin: 10px;
+}

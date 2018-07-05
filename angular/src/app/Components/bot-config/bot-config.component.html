@@ -1,0 +1,53 @@
+<div class="bot-info">
+  <div class="branding">
+      <img src="assets/img/logo.png" alt="">
+    
+
+  </div>
+  <div class="back">
+    <a class="fa fa-reply-all" aria-hidden="true" style="font-size:24px" routerLink="../../../bots"></a>
+  </div>
+  <div class="bot-name">
+    {{bot}}
+  </div>
+  <div class="dropdown">
+    {{userName}}
+    <div class="dropdown-content">
+      <a href="#" (click)="logOut()">Log out</a>
+    </div>
+  </div>
+</div>
+<div class="wrapper-content">
+  <!-- menu doc -->
+  <div class="horNav">
+    <app-bot-config-nav (ConfigType)="getConfigType($event)"></app-bot-config-nav>
+  </div>
+  <!-- ket thuc menu doc -->
+
+  <!-- noi dung configure -->
+  <div class="config-content" [ngSwitch]="configType">
+    <div *ngSwitchCase="'plugins'">
+      <app-plugins></app-plugins>
+    </div>
+    <div *ngSwitchCase="'faqs'" class="faq">
+      <app-faqs></app-faqs>
+    </div>
+    <div *ngSwitchCase="'unknown'" class="unknown">
+      <app-unknown></app-unknown>
+    </div>
+    <div *ngSwitchCase="'broadcast'">
+      <app-broadcast></app-broadcast>
+    </div>
+    <div *ngSwitchCase="'users'">
+      <app-fb-user></app-fb-user>
+    </div>
+    <div *ngSwitchCase="'configure'">
+      <app-configure></app-configure>
+    </div>
+    <div *ngSwitchCase="'dashboard'">
+      <app-dashboard></app-dashboard>
+    </div>
+
+  </div>
+  <!-- ket thuc noidung configure -->
+</div>

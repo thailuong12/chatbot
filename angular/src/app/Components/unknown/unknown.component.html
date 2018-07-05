@@ -1,0 +1,99 @@
+<div class="container">
+  <h2>IMPROVE YOUR BOT KNOWLEDGE</h2>
+  <div class="addAnswer">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#addFaqModal">Give The Answer For Checked Questions</button>
+  </div>
+  <mat-card class="unknown" *ngFor="let unk of listUnknown">
+    <div class="delete">
+      <i class="material-icons deleteUnknown" (click)="deleteUnknown(unk._id)">delete_sweep</i>
+    </div>
+    <div class="view">
+      <i class="material-icons viewMess" (click)="getFbUser(unk.botId,unk.appId)" data-toggle="modal" data-target="#messageModal">announcement</i>
+    </div>
+    <mat-card-content>
+      <div class="checkbox">
+        <mat-checkbox (change)="checkUnknowndId(unk._id)"></mat-checkbox>
+      </div>
+      <div class="question">
+        <p>
+          {{unk.question}}
+        </p>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="modal addFaq" id="addFaqModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Give An Answer</h4>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]='addFaqForm'>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Question</label>
+            <div class="col-sm-10">
+              <textarea type="text" class="form-control" name="question" formControlName="question"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Answer</label>
+            <div class="col-sm-10">
+              <textarea type="text" class="form-control" name="answer" formControlName="answer"></textarea>
+            </div>
+
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!addFaqForm.valid" (click)="addFaq()">Create</button>
+        </form>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="messageModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Chat History</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="chatlog" *ngFor="let chat of fbChat">
+          <div class="time">
+            <label for="">{{chat.time}}</label>
+          </div>
+          <div class="userchat">
+            {{chat.chat}}
+
+          </div>
+          <div class="botchat">
+            <div>
+
+            </div>
+            <div>
+              {{chat.botChat}}
+
+            </div>
+
+          </div>
+
+          <hr>
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

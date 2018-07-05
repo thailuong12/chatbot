@@ -1,0 +1,149 @@
+<!-- <div class="sidebar-nav">
+  <ul class="nav">
+    <a [routerLink]="['/bots/',botID]" (click)="getConfigType('plugins')">
+      <li class="add-form">
+
+        <div class="item">
+          <div class="icon">
+              <i class="material-icons" style="font-size:36px">style</i>
+           
+          </div>
+          <div class="text">
+            Plugin
+          </div>
+        </div>
+      </li>
+    </a>
+    <a [routerLink]="['../faqs']" (click)="getConfigType('faqs')">
+      <li class="add-form">
+
+        <div class="item">
+          <div class="icon">
+              <i class="material-icons" style="font-size:36px">forum</i>
+           
+          </div>
+          <div class="text">
+            FAQs
+          </div>
+        </div>
+
+      </li>
+    </a>
+    <a [routerLink]="['../unknown']" ion-button block (click)="getConfigType('unknown')" >
+      <li class="add-form" [ngStyle]="{'background-color': buttonColor}">
+
+        <div class="item">
+          <div class="icon">
+              <i class="material-icons" style="font-size:36px">feedback</i>
+            
+          </div>
+          <div class="text">
+            Unknown
+          </div>
+        </div>
+
+      </li>
+    </a>
+    <a [routerLink]="['../broadcast']" (click)="getConfigType('broadcast')">
+      <li class="add-form">
+
+        <div class="item">
+          <div class="icon">
+              <i class="fa fa-bullhorn" style="font-size:36px"></i>
+          
+          </div>
+          <div class="text">
+            Broadcast
+          </div>
+        </div>
+
+      </li>
+    </a>
+    <a [routerLink]="['../users']" (click)="getConfigType('users')">
+      <li class="add-form">
+
+        <div class="item">
+          <div class="icon">
+              <i class="material-icons" style="font-size:36px">group</i>
+         
+          </div>
+          <div class="text">
+            Users
+          </div>
+        </div>
+      </li>
+    </a>
+    <a [routerLink]="['../configure']" (click)="getConfigType('configure')">
+      <li class="add-form">
+
+        <div class="item">
+          <div class="icon">
+              <i class="fa fa-cog" style="font-size:36px"></i>
+        
+          </div>
+          <div class="text">
+            Configure
+          </div>
+        </div>
+
+      </li>
+    </a>
+    <a [routerLink]="['../dashboard']" (click)="getConfigType('dashboard')">
+      <li class="add-form">
+
+        <div class="item">
+          <div class="icon">
+              <i class="fa fa-bar-chart" style="font-size:36px"></i>
+         
+          </div>
+          <div class="text">
+            Dashboard
+          </div>
+        </div>
+
+      </li>
+    </a>
+  </ul>
+</div>
+-->
+
+
+
+<ul class="nav">
+  <li [routerLink]="['/bots/',botID]" (click)="getConfigType('plugins')" [ngStyle]="{'color':configType === 'plugins' ? '#2F88C2' : 'white' }">
+    <i class="material-icons" style="font-size:25px">style</i>
+    <div class="animated bounceInLeft">Plugin</div>
+  </li>
+
+  <li [routerLink]="['../faqs']" (click)="getConfigType('faqs')" [ngStyle]="{'color':configType === 'faqs' ? '#2F88C2' : 'white' }">
+    <i class="material-icons" style="font-size:25px">forum</i>
+    <div class="animated bounceInLeft">FAQs</div>
+  </li>
+
+  <li [routerLink]="['../unknown']" ion-button block (click)="getConfigType('unknown')" [ngStyle]="{'color':configType === 'unknown' ? '#2F88C2' : 'white' }">
+    <i class="material-icons" style="font-size:25px">feedback</i>
+    <div class="animated bounceInLeft">Unknown</div>
+  </li>
+  <li [routerLink]="['../users']" ion-button block (click)="getConfigType('users')" [ngStyle]="{'color':configType === 'users' ? '#2F88C2' : 'white' }">
+    <i class="material-icons" style="font-size:25px">group</i>
+    <div class="animated bounceInLeft">FaceBook Users</div>
+  </li>
+  <li [routerLink]="['../broadcast']" ion-button block (click)="getConfigType('broadcast')" [ngStyle]="{'color':configType === 'broadcast' ? '#2F88C2' : 'white' }">
+    <i class="fa fa-bullhorn" style="font-size:25px"></i>
+    <div class="animated bounceInLeft">BroadCast</div>
+  </li>
+
+  <li [routerLink]="['../configure']" ion-button block (click)="getConfigType('configure')" [ngStyle]="{'color':configType === 'configure' ? '#2F88C2' : 'white' }">
+    <i class="fa fa-cog" style="font-size:25px"></i>
+    <div class="animated bounceInLeft">Configurations</div>
+  </li>
+
+  <li [routerLink]="['../dashboard']" ion-button block (click)="getConfigType('dashboard')" [ngStyle]="{'color':configType === 'dashboard' ? '#2F88C2' : 'white' }">
+    <i class="fa fa-bar-chart" style="font-size:25px"></i>
+    <div class="animated bounceInLeft">Dashboard</div>
+  </li>
+  <hr>
+</ul>
+
+
+<script src='https://use.fontawesome.com/cece742d74.js'></script>

@@ -1,0 +1,22 @@
+<div class="bitly">
+  <table style="table-layout: fixed; width: 650px;" class="table table-hover">
+    <thead>
+      <tr>
+        <th style="width: 200px;" class="text-muted">Date</th>
+        <th style="width: 300px;" class="text-muted">Link</th>
+        <th style="width: 100px;" class="text-muted">Total Clicks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let item of listHash">
+        <td style="width: 100px;">{{item.date| date:'longDate'}}</td>
+        <td style="width: 400px;">
+          <a  href="{{item.link}}" target="_blank">{{item.link}}</a>
+        </td>
+      <td style="width: 70px;">
+           {{item.total}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

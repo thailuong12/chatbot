@@ -1,0 +1,40 @@
+.card {
+  background-color: #FFFFFF;
+  max-height: 500px;
+}
+
+.card-body {
+  margin-top: 10px;
+}
+
+
+.boundary {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  width: 1140px;
+  height: 280px;
+  margin-left: 15px;
+  margin-top: 20px;
+ 
+}
+.popURL{
+  margin-right: 50px;
+  background-color: #FFFFFF;
+  
+}
+
+.link-to-chart {
+  height: 380px;
+  /* Trigger vertical scroll */
+  overflow-y: auto;
+  /* Hide the horizontal scroll */
+  overflow-x: hidden;
+}
+
+.overflow-container{
+  height: 93vh;
+   /* Trigger vertical scroll */
+   overflow-y: auto;
+   /* Hide the horizontal scroll */
+   overflow-x: hidden;
+}

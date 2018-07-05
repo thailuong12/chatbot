@@ -1,0 +1,26 @@
+<div class="cont">
+  <div class="branding">
+   <img src="assets/img/logo.png" alt="">
+  </div>
+  <div class="nav">
+    <nav>
+      <ul>
+        <li>
+          <a [routerLink]="['../bots']">Manage Bots</a>
+        </li>
+        <li>
+          <a [routerLink]="['../accounts']">Manage Accounts</a>
+        </li>
+        <li>
+          <a [routerLink]="['../webhook']">Webhook</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="dropdown">
+    {{userName}}
+    <div class="dropdown-content">
+      <a href="#" (click)="logOut()">Log out</a>
+    </div>
+  </div>
+</div>

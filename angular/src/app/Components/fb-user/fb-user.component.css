@@ -1,0 +1,41 @@
+
+
+
+h2{
+        text-align:  center;
+        color: #2F88C2;   
+}
+.container .mat-column-gender{
+        max-width: 100px;
+      }
+
+ mat-header-cell{
+              font-size: 17px;
+              font:black
+}
+.search{
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 300px;
+}
+.modal-body{
+overflow-y: scroll;
+        height: 400px;
+
+}
+.gender{
+        text-transform: uppercase;
+}
+.botchat{
+        display: grid;
+        grid-template-columns: 30% 70%;
+        text-align: right;
+}
+.surveyContent{
+       
+        margin-left: 10px;
+}
+.survey{
+        display: grid;
+        grid-template-columns: 15% 85%;
+}

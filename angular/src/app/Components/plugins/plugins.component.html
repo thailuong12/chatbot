@@ -1,0 +1,422 @@
+<div class="plugins-content">
+  <div class="list-plugin">
+    <div class="title">
+      <h5>PLUG-IN LIST</h5>
+    </div>
+    <hr>
+    <!-- danh sách các plugin -->
+    <div class="listttt">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Fansign
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="list-btn">
+          <button mat-button *ngFor="let block of getBlockByPlugin('fansign')" (click)="getBlock(block._id)">{{block.name}}</button>
+        </div>
+        <mat-action-row>
+          <button mat-button color="primary" data-toggle="modal" data-target="#idolModal">Add An Idol</button>
+          <!-- Modal -->
+
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            News
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="list-btn">
+          <button mat-button *ngFor="let block of getBlockByPlugin('news')" (click)="getBlock(block._id)">{{block.name}}</button>
+        </div>
+        <mat-action-row>
+          <!-- <button mat-button color="warn">Delete Plugin</button> -->
+        </mat-action-row>
+      </mat-expansion-panel>
+      <!-- <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Review Chapter
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="list-btn">
+          <button mat-button *ngFor="let block of getBlockByPlugin('review')" (click)="getBlock(block._id)">{{block.name}}</button>
+        </div>
+        <mat-action-row>
+         
+        </mat-action-row>
+      </mat-expansion-panel> -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Voting Game
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="list-btn">
+          <button mat-button *ngFor="let block of getBlockByPlugin('minigame')" (click)="getBlock(block._id)">{{block.name}}</button>
+        </div>
+        <mat-action-row>
+          <button mat-button color="primary" data-toggle="modal" data-target="#teamModal">Add Team</button>
+          <!-- <button mat-button color="warn">Delete Plugin</button> -->
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Home
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="list-btn">
+          <button mat-button *ngFor="let block of getBlockByPlugin('home')" (click)="getBlockHome(block._id)">{{block.name}}</button>
+        </div>
+   
+      </mat-expansion-panel>
+      <!-- <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            About Us
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="list-btn">
+          <button mat-button *ngFor="let block of getBlockByPlugin('aboutus')" (click)="getBlock(block._id)">{{block.name}}</button>
+
+        </div>
+
+        <mat-action-row>
+        
+        </mat-action-row>
+      </mat-expansion-panel> -->
+
+    </div>
+
+  </div>
+  <!-- nội dung các plugin -->
+
+  <div class="block" *ngIf="blockActive==true">
+    <div class="block-name" >
+      <div class="name">
+        <input type="text" class="form-control blockname" value="{{block[0].name}}" [ngClass]="{'has-error': 1==1}" required (change)="saveBlockName($event)">
+      </div>
+      <div *ngIf="block[0].name != 'Chọn Idol' && block[0].name != 'Xem tin tức'  && block[0].name != 'Bầu Chọn' && block[0].name != 'Tham Gia Dự Đoán' " >
+        <i class="material-icons deleteBlocksBtn" (click)="deleteBlock(block[0]._id,block[0].flow[1].delToken,block[0].flow[0].delToken)">delete_sweep</i>
+      </div>
+
+    </div>
+    <hr>
+    <div class="block-content" >
+      <div *ngFor="let item of blockFlow">
+        <div *ngIf="item.type=='text'" class="text">
+          <textarea rows="4" cols="50" (change)="saveText($event,item)"> {{item.text}}</textarea>
+        </div>
+        <div *ngIf="item.type=='template'" class="template">
+          <textarea rows="4" cols="50" (change)="saveText($event,item)"> {{item.text}}</textarea>
+          <div *ngFor="let button of item.buttons">
+            <mat-card *ngIf="button.type=='postback'">
+              <mat-card-header>
+                <mat-card-title>{{button.title}}</mat-card-title>
+                <mat-card-subtitle>Block: {{button.payload}}</mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+            <mat-card *ngIf="button.type=='web_url'">
+              <mat-card-header>
+                <mat-card-title>{{button.title}}</mat-card-title>
+                <mat-card-subtitle>URL: {{button.url}}</mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+          </div>
+        </div>
+    
+        <div *ngIf="item.type=='quickreplies'"  class="quickreplies">
+          <textarea rows="4" cols="50" (change)="saveText($event,item)"> {{item.text}}</textarea>
+          <div class="list-quickreply">
+            <mat-card class="quickreply" *ngFor="let quickreply of item.quickreplies">
+             
+              <mat-card-header>
+                <div class="content"  >
+                  <div class="header">
+                   
+                    <mat-card-title>{{quickreply.title}}</mat-card-title>
+                    <mat-card-subtitle>Block:{{quickreply.payload}} </mat-card-subtitle>
+                  </div>
+                  <div class="menu">
+                    <i class="material-icons deleteQuickBtn" (click)="deleteQuickReply(quickreply._id)">delete_sweep</i>
+
+                  </div>
+                </div>
+              </mat-card-header>
+            </mat-card>
+            <mat-card class="add-quickreply" (click)="changeAddQuickStatus()" *ngIf="addQuickStatus==false">
+              <span class="glyphicon glyphicon-plus"></span>
+              Add Quick Reply
+            </mat-card>
+            <mat-card class="form-add-quickreply" *ngIf="addQuickStatus==true">
+              <form [formGroup]="quickReplyForm" class="addQuickForm">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="name">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Block Name</label>
+                  <div class="col-sm-10">
+                    <input type="text"  class="form-control" [matAutocomplete]="auto" formControlName="blockname">
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let block of getBlockByPlugin(blockPlugin)" [value]="block.name">
+                        {{block.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </div>
+                </div>
+              </form>
+              <div class="twobtnAddQuick">
+                <button class="btn btn-primary addQuickCancel" (click)="changeAddQuickStatus()">Cancel</button>
+                <button class="btn btn-primary addQuickOk"  [disabled]="!quickReplyForm.valid" (click)="addQuickReply()">Ok</button>
+              </div>
+
+            </mat-card>
+          </div>
+
+        </div>
+        <div *ngIf="item.type=='image'" class="image">
+          <img src={{item.url}} alt="">
+          <div>
+            <button type="button" class="btn btn-success abc" (click)="fileInput.click()">Upload an image....</button>
+            <input type="file" id="fileupload" ng2FileSelect [style.display]="'none'" [uploader]="uploader" #fileInput/>
+            <button type="button" class="btn btn-success abc" (click)="editImage(item.delToken,item)">Edit</button>
+            <div *ngIf="progressBar">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+          </div>
+          <div *ngFor="let item of uploader.queue">
+            <h4>{{ item.file.name }}</h4>
+          </div>
+          <br>
+          <h4>{{message}}</h4>
+        </div>
+        <div class="gallery" *ngIf="item.type=='gallery'">
+          <div class="news" *ngFor="let news of item.elements">
+            <div class="news-item">
+
+
+
+              <div>
+                <div class="deleteNews">
+                  <i class="material-icons deleteNewsBtn" (click)="deleteNews(news._id)">delete_sweep</i>
+
+                </div>
+                <form>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" value="{{news.title}}" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Subtitle</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" value="{{news.subtitle}}" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Link</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" value="{{news.buttons[0].url}}" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Picture</label>
+                    <div class="col-sm-10">
+                    </div>
+                    <img src="{{news.image_url}}">
+                  </div>
+                </form>
+
+              </div>
+
+
+
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary addNewsBtn" data-toggle="modal" data-target="#newsModal">Add A News</button>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="blockHome"  *ngIf="blockHomeActive==true">
+      <div class="block-name" >
+          <div class="name">
+            <input type="text" class="form-control blockhomename" value="{{block[0].name}}" [ngClass]="{'has-error': 1==1}" required (change)="saveBlockName($event)">
+          </div>
+          <div *ngIf="block[0].name != 'home' " >
+            <i class="material-icons deleteBlocksBtn" (click)="deleteBlock(block[0]._id,block[0].flow[1].delToken,block[0].flow[0].delToken)">delete_sweep</i>
+          </div>
+    
+        </div>
+    <div class="gallery">
+      <div class="news" *ngFor="let home of blockHomeElement;let i =index">
+        <div class="news-item">
+
+
+
+          <div>
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="{{home.title}}" (focusout)="editHomeTitle($event,i)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Subtitle</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="{{home.subtitle}}" (focusout)="editHomeSubTitle($event,i)">
+                </div>
+              </div>          
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Picture</label>
+                <div class="col-sm-10">
+                </div>
+                <img src="{{home.image_url}}">
+                <div class="editHomeImage">
+                    <div>
+                        <button type="button" class="btn btn-success abc" (click)="fileInput.click()">Upload an image....</button>
+                        <input type="file" id="fileupload" ng2FileSelect [style.display]="'none'" [uploader]="uploader" #fileInput/>
+                        <button type="button" class="btn btn-success abc" (click)="editHomeImage(home.delToken,i)">Edit</button>
+                        <div *ngIf="progressBar">
+                          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                        </div>
+                      </div>
+                      
+                      <br>
+                      <h4>{{message}}</h4>
+                </div>
+             
+              </div>
+            </form>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal dialog -->
+<div class="modal addquick" id="idolModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add An Idol</h4>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="idolForm">
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control idolname" name="text" formControlName="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Image</label>
+            <div class="col-sm-10">
+              <input type="file" id="fileupload" ng2FileSelect [style.display]="'none'" [uploader]="uploader" formControlName="imglink"
+                #fileInput/>
+              <button type="button" class="btn btn-success idol" (click)="fileInput.click()">Upload an image....</button>
+              <div *ngFor="let item of uploader.queue">
+                <h4>{{ item.file.name }}</h4>
+              </div>
+              <h4>{{message}}</h4>
+            </div>
+
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!idolForm.valid" (click)="addIdol()">Create</button>
+        </form>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal addquick" id="teamModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Team</h4>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="teamForm">
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control teamname" name="name" formControlName="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Image</label>
+            <div class="col-sm-10">
+              <input type="file" id="fileupload" ng2FileSelect [style.display]="'none'" [uploader]="uploader" formControlName="imglink"
+                #fileInput/>
+              <button type="button" class="btn btn-success team" (click)="fileInput.click()">Upload an image....</button>
+              <div *ngFor="let item of uploader.queue">
+                <h4>{{ item.file.name }}</h4>
+              </div>
+              <h4>{{message}}</h4>
+            </div>
+
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!teamForm.valid"(click)="addTeam()">Create</button>
+        </form>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal addNews" id="newsModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add A News</h4>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="newsForm">
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Link</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="title" formControlName="link">
+            </div>
+          </div>
+        </form>
+        <button type="submit" class="btn btn-success" [disabled]="!newsForm.valid"(click)="addNews()">Create</button>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

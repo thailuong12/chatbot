@@ -1,0 +1,12 @@
+.boudaries {
+    background-color: #FFFFFF;
+    width: 1140px;
+    height: 450px;
+    margin-top: 20px;
+  }
+  
+  .lineChart {
+    max-width: 880px;
+    max-height: 200px;
+    margin: auto;
+  }

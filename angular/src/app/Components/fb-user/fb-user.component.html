@@ -1,0 +1,130 @@
+<div class="container">
+  <h2>PEOPLE INTERACTED WITH CHATBOT</h2>
+  <div class="example-container mat-elevation-z8">
+    <div class="search">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>User Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.firstname}} {{element.lastname}}
+
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="locale">
+        <mat-header-cell *matHeaderCellDef>Locale </mat-header-cell>
+        <mat-cell class="locale" *matCellDef="let element">
+          {{element.locale}}
+        </mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="timezone">
+        <mat-header-cell *matHeaderCellDef>Timezone </mat-header-cell>
+
+        <mat-cell class="timezone" *matCellDef="let element">
+          UTC +{{element.timezone}}
+        </mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef>Gender </mat-header-cell>
+        <mat-cell class="gender" *matCellDef="let element">
+          {{element.gender}}
+        </mat-cell>
+
+      </ng-container>
+
+      <ng-container matColumnDef="activities">
+        <mat-header-cell *matHeaderCellDef>Activities </mat-header-cell>
+        <mat-cell class="idol" *matCellDef="let element">
+          <button class="btn btn-primary" (click)="getFbUser(element._id)" data-toggle="modal" data-target="#messageModal">View</button>
+
+        </mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="message">
+        <mat-header-cell *matHeaderCellDef>Message </mat-header-cell>
+        <mat-cell class="idol" *matCellDef="let element">
+          <button class="btn btn-primary" (click)="getFbUser(element._id)" data-toggle="modal" data-target="#activitiesModal">View</button>
+        </mat-cell>
+
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>
+
+<div class="modal" id="activitiesModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Chat History</h4>
+      </div>
+      <div class="modal-body">
+        <div class="chatlog" *ngFor="let chat of fbChat">
+          <div class="time">
+            <label for="">{{chat.time}}</label>
+          </div>
+          <div class="userchat">
+            {{chat.chat}}
+          </div>
+          <div class="botchat">
+            <div>
+            </div>
+            <div>
+              {{chat.botChat}}
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="messageModal" role="dialog" data-dismiss="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Activities</h4>
+      </div>
+
+      <div class="modal-body" *ngFor="let user of fbUser">
+        <div>
+          <label for="">Voting : </label> <span>{{user.activities[0].voting}}</span>
+
+        </div>
+        <div>
+          <label for="">Fansign : </label><span> {{user.activities[0].fansign}}</span>
+        </div>
+        <div class="survey">
+          <div class="Surveylable">
+            <label for="">Survey : </label>
+          </div>
+          <div class="surveyContent" >
+            <div for="" *ngFor="let fbSurveys of fbSurvey">
+              <span>
+                  {{fbSurveys.result}}
+
+              </span>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

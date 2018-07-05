@@ -1,0 +1,204 @@
+.broadcast-content {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+hr {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+.send{
+  width: 400px;
+}
+.now-survey-content mat-card  {
+  width: 250px;
+  float: left;
+  border-radius: 50px;
+  margin-right: 5px;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+ mat-card{
+  text-align: center;
+}
+
+.BroadCastName{
+  width: 400px;
+}
+
+.now-survey-content .content {
+  display: grid;
+
+  grid-template-columns: 94% 6%;
+  margin-top: -9px;
+}
+.now-survey-content .content .header mat-card-title{
+  font-size: 20px;
+}
+.now-survey-content .deleteQuickBtn {
+  cursor: pointer;
+}
+.now-survey-content .form-add-quickreplies{
+  background-color: white;
+  width: 300px;
+border-radius: 5px;
+height: 150px; 
+}
+.now-survey-content .add-quickreplies {
+  cursor: pointer;
+
+}
+
+.now-survey-content .add-quickreplies .test {
+  margin-top: -7px;
+
+}
+/* broadcast type*/
+textarea{
+  width: 400px;
+  height: 100px;
+  resize: none;
+  border-radius: 5px;
+}
+.broadcast-type {
+  min-height: 93vh;
+  background-color: #F3F2F2;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.now {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+ 
+}
+
+.send-now-news, .send-now-survey {
+  width:80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* white-space: pre-line;  */
+  /* word-spacing: 200px; */
+}
+.add-new-survey{
+  width:80%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+
+
+.add-schedule-btn .glyphicon {
+  margin-right: 5px;
+}
+
+.list-schedule {
+  margin-bottom: 10px;
+}
+
+.schedule-btn {
+  float: left;
+  margin-right: 5px;
+  width: 165px;
+}
+
+.add-schedule-btn {
+  margin-top: 10px;
+  width: 165px;
+}
+.modal {
+  margin-top: 100px;
+}
+.deleteSurvey{
+  cursor: pointer;
+  float: right;
+  margin-top: -100px;
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+/* end broadcast type*/
+
+/* broadcast config*/
+
+
+.broadcast-config {
+  height: 93vh;
+  background-color: #F9F8F8;
+ 
+  overflow: auto;
+  overflow-x: hidden;
+}
+    /* NOW CONTENT*/
+
+.now-content {
+  padding: 10px;
+  padding-right: 0;
+}
+
+
+
+button {
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* END NOW CONTENT*/
+
+    /* SCHEDULE CONTENT*/
+
+.schedule-content {
+  padding: 10px;
+  margin-right: 0px;
+  width: 100%
+}
+
+
+
+
+
+
+
+.schedule-attribute-block {
+  background-color: white;
+  padding: 15px;
+  margin-right: -10px;
+  margin-left:  -10px;
+  margin-top: 0px;
+
+}
+
+
+
+
+
+
+
+
+    /* END SCHEDULE CONTENT*/
+
+/* end broadcast config*/

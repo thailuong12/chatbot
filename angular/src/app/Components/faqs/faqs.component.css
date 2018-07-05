@@ -1,0 +1,68 @@
+.container{
+ height: 100vh;
+  padding-left: 100px;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left;
+}
+mat-table textarea{
+  resize: none;
+  width: 800px;
+  border:0px;
+}
+h2 {
+  text-align:  center;
+  color: #2F88C2;
+}
+.search{
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 300px;
+  
+}
+.mat-table {
+  overflow: auto;
+  max-height: 350px;
+  height: 350px;
+}
+mat-cell {
+  padding-right: 20px;
+}
+.container .mat-column-delete{
+  max-width: 10px;
+}
+
+.addFaqBtn{
+ margin-top: 20px;
+ 
+}
+.alignright{
+  text-align: right;
+}
+.deleteFaqBtn{
+  cursor: pointer;
+  text-align: right;
+}
+.labelAdd{
+  margin-top: 35px;
+  margin-bottom: -10px;  
+}
+.addFaqForm{
+  width: 800px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  
+}
+.addFaqForm input {
+  resize: none;
+  width: 90%;
+  height: 50px;
+}
+.addFaqForm .createFaqBtn{
+  float: right;
+  margin-top: -55px;
+}

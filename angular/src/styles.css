@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+#body {
+  
+  background-color: white;
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer */
+  -khtml-user-select: none;
+  /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none;
+  /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none;
+  /* Disable Android and iOS callouts*/
+  background-color: #F3F2F2;
+  min-width: 100vh;
+  overflow-y: hidden;
+
+  
+  font-family: 'SF UI Display', 'Montserrat', "Segoe UI", Arial, sans-serif;
+ 
+}
